@@ -24,6 +24,7 @@ from .core import (
 from .detector import Detector, ScanResult, ChangePoint
 from .stream import StreamDetector, Alert
 from .confidence import compare, ComparisonResult
+from .design import Design, DesignReport
 
 try:
     from .sklearn import InvariantScaler
@@ -39,7 +40,7 @@ def scan(signal, nuisance="multiplicative", order=1, **kwargs):
     return Detector(nuisance=nuisance, order=order, **kwargs).scan(signal)
 
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 __all__ = [
     "transform",
@@ -54,4 +55,6 @@ __all__ = [
     "ChangePoint",
     "ComparisonResult",
     "Alert",
+    "Design",
+    "DesignReport",
 ]

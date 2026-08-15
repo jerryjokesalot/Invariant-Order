@@ -91,6 +91,46 @@ pipe.predict(X_drifted)  # works at 2x, 10x, 50x drift — same accuracy
 
 Tested on NASA IMS bearing data: raw features drop to 33% accuracy at 2x drift. Invariant features hold at 98.5% at 10x drift. See [`experiments/invariant_features_ml.py`](experiments/invariant_features_ml.py).
 
+## Design: The Mathematical Contract
+
+The `Design` class doesn't just transform data — it tells you what the transformation guarantees, what it suppresses, and what becomes fundamentally unidentifiable:
+
+```python
+from invariant_order import Design
+
+design = Design(nuisance="multiplicative", order=2)
+report = design.analyze(signal)
+print(report)
+```
+
+Output:
+
+```
+INVARIANT REPRESENTATION DESIGN
+
+  Nuisance group:    Multiplicative scale
+  Differential order: 2
+
+  Suppressed (by design):
+    • constant gain (s → c·s)
+    • linear gain drift (s → (a+bt)·s)
+
+  Preserved:
+    • Variability structure (beat-to-beat irregularity)
+    • Temporal dynamics (pattern changes, transients)
+
+  ⚠  Identifiability boundary:
+    Pure multiplicative signal changes cannot be distinguished
+    from sensor gain drift using this observation alone.
+
+  Symmetry breakers (additional info that resolves ambiguity):
+    → Reference sensor
+    → Calibration history
+    → Physics model
+```
+
+This is a scientific contract, not just a preprocessing function. It tells you what your representation is invariant to, and what becomes mathematically unresolvable as a consequence.
+
 ## Nuisance Types
 
 | Nuisance | Transform | What it ignores |
@@ -112,6 +152,7 @@ Higher `order` suppresses higher-degree polynomial drift. Order 1 handles linear
 | `io.invariant_order(exponents)` | Determine invariant differential order |
 | `io.frequency_response(order, omegas)` | Frequency response [2sin(ω/2)]^m |
 | `InvariantScaler(...)` | Sklearn-compatible drift-immune feature transformer |
+| `Design(...)` | Observable designer with mathematical contract |
 
 ## How It Works
 
