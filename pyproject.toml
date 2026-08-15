@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "invariant-order"
-version = "0.1.1"
+version = "0.2.0"
 description = "Detect structural change, ignore nuisance drift. Mathematically guaranteed."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -32,8 +32,9 @@ Repository = "https://github.com/jerryjokesalot/Invariant-Order"
 Issues = "https://github.com/jerryjokesalot/Invariant-Order/issues"
 
 [project.optional-dependencies]
-full = ["scipy>=1.7"]
-dev = ["pytest>=7.0", "scipy>=1.7"]
+full = ["scipy>=1.7", "scikit-learn>=1.0"]
+ml = ["scikit-learn>=1.0"]
+dev = ["pytest>=7.0", "scipy>=1.7", "scikit-learn>=1.0"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/invariant_order"]

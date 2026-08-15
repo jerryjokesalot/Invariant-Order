@@ -25,6 +25,11 @@ from .detector import Detector, ScanResult, ChangePoint
 from .stream import StreamDetector, Alert
 from .confidence import compare, ComparisonResult
 
+try:
+    from .sklearn import InvariantScaler
+except ImportError:
+    pass
+
 
 def scan(signal, nuisance="multiplicative", order=1, **kwargs):
     """Scan a signal for structural change points.
@@ -34,7 +39,7 @@ def scan(signal, nuisance="multiplicative", order=1, **kwargs):
     return Detector(nuisance=nuisance, order=order, **kwargs).scan(signal)
 
 
-__version__ = "0.1.1"
+__version__ = "0.2.0"
 
 __all__ = [
     "transform",
