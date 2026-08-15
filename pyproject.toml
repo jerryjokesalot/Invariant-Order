@@ -4,16 +4,32 @@ build-backend = "hatchling.build"
 
 [project]
 name = "invariant-order"
-version = "0.1.0"
+version = "0.1.1"
 description = "Detect structural change, ignore nuisance drift. Mathematically guaranteed."
+readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
 authors = [
     { name = "Jerry Becker" },
 ]
+keywords = ["change-detection", "signal-processing", "invariant", "drift", "predictive-maintenance"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
 dependencies = [
     "numpy>=1.20",
 ]
+
+[project.urls]
+Homepage = "https://github.com/jerryjokesalot/Invariant-Order"
+Repository = "https://github.com/jerryjokesalot/Invariant-Order"
+Issues = "https://github.com/jerryjokesalot/Invariant-Order/issues"
 
 [project.optional-dependencies]
 full = ["scipy>=1.7"]

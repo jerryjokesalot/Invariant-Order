@@ -34,7 +34,7 @@ def scan(signal, nuisance="multiplicative", order=1, **kwargs):
     return Detector(nuisance=nuisance, order=order, **kwargs).scan(signal)
 
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "transform",
