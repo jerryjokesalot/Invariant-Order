@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "invariant-order"
+version = "0.1.0"
+description = "Detect structural change, ignore nuisance drift. Mathematically guaranteed."
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    { name = "Jerry Becker" },
+]
+dependencies = [
+    "numpy>=1.20",
+]
+
+[project.optional-dependencies]
+full = ["scipy>=1.7"]
+dev = ["pytest>=7.0", "scipy>=1.7"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/invariant_order"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
