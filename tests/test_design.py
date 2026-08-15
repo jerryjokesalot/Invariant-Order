@@ -23,9 +23,9 @@ class TestDesign:
         d = Design(nuisance="multiplicative", order=1)
         report = d.analyze()
         assert isinstance(report, DesignReport)
-        assert report.group == "Multiplicative scale"
+        assert report.nuisance_group == "Multiplicative scale"
         assert report.order == 1
-        assert report.space == "log"
+        assert report.working_space == "log"
         assert report.transformed is None
         assert report.signal_length == 0
 
@@ -75,18 +75,18 @@ class TestDesign:
 
     def test_additive_design(self):
         report = Design("additive", 1).analyze()
-        assert report.group == "Additive translation"
-        assert report.space == "linear"
+        assert report.nuisance_group == "Additive translation"
+        assert report.working_space == "linear"
         assert any("offset" in s for s in report.suppressed)
 
     def test_str_output(self):
         report = Design("multiplicative", 1).analyze()
         text = str(report)
-        assert "INVARIANT REPRESENTATION DESIGN" in text
-        assert "Suppressed" in text
-        assert "Preserved" in text
-        assert "Identifiability" in text
-        assert "Symmetry breakers" in text
+        assert "INVARIANT OBSERVABLE DESIGN CONTRACT" in text
+        assert "SUPPRESSED" in text
+        assert "PRESERVED" in text
+        assert "IDENTIFIABILITY" in text
+        assert "SYMMETRY BREAKERS" in text
 
     def test_str_with_signal(self):
         signal = np.random.exponential(1.0, 200)
